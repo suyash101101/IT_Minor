@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 3 - Task 1</title>
+  <style>
+    *{ box-sizing:border-box }
+    body{ margin:0; font-family: Arial, sans-serif; color:#222; background:#fafafa }
+    header{ background:#fff; border-bottom:1px solid #ddd }
+    .container{ max-width:900px; margin:0 auto; padding:12px }
+    h1{ margin:0; font-size:20px }
+    nav a{ margin-right:8px }
+    main{ padding:16px 0 }
+    section{ background:#fff; border:1px solid #ddd; padding:12px; margin-bottom:12px }
+    table{ width:100%; border-collapse:collapse }
+    th,td{ border:1px solid #ddd; padding:6px; text-align:left }
+    form{ display:grid; gap:8px; max-width:360px }
+    input,button{ padding:8px; border:1px solid #ccc }
+    .muted{ color:#666 }
+    .message.success{ color:green }
+    .message.error{ color:#c00 }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Lab 3 — HTML Structures</h1>
+      <nav aria-label="Primary">
+        <a href="#favorites">Favorites</a>
+        <a href="#activities">Activities</a>
+        <a href="#login">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="favorites" aria-labelledby="favorites-heading">
+      <h2 id="favorites-heading">Favorites</h2>
+      <p class="muted">Some personal favorites and basic lists.</p>
+
+      <h3>Top 3 Movies</h3>
+      <ul>
+        <li>Inception</li>
+        <li>The Dark Knight</li>
+        <li>Interstellar</li>
+      </ul>
+    </section>
+
+    <section id="activities" aria-labelledby="activities-heading">
+      <h2 id="activities-heading">Activities</h2>
+      <p class="muted">Steps, tabular data, forms, and a brief intro.</p>
+
+      <h3>How to Make a Cup of Tea</h3>
+      <ol>
+        <li>Boil fresh water in a kettle.</li>
+        <li>Pour hot water over a tea bag in a cup.</li>
+        <li>Steep for 3–5 minutes, remove bag, then add milk/sugar to taste.</li>
+      </ol>
+
+      <h3>Student Scores</h3>
+      <table aria-label="Student scores table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Aisha</td>
+            <td>92</td>
+          </tr>
+          <tr>
+            <td>Rahul</td>
+            <td>85</td>
+          </tr>
+          <tr>
+            <td>Maya</td>
+            <td>78</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Sign Up</h3>
+      <form id="signup-form" aria-label="Signup form">
+        <div>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="you@example.com" required>
+        </div>
+        <div>
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" placeholder="••••••••" required>
+        </div>
+        <div>
+          <button type="submit">Submit</button>
+        </div>
+        <div id="signup-message" class="message" role="status" aria-live="polite"></div>
+      </form>
+
+      <div style="border: 2px solid #0d6efd; border-radius: 10px; padding: 12px; margin-top: 16px; background: #ffffff;">
+        <h3>About Me</h3>
+        <p>Hello! I'm a web enthusiast who enjoys learning front-end development and crafting clean, accessible interfaces.</p>
+      </div>
+
+      <h3 id="login">Login</h3>
+      <form id="login-form" aria-label="Login form">
+        <div>
+          <label for="username">Username</label>
+          <input id="username" name="username" type="text" placeholder="Enter username" required>
+        </div>
+        <div>
+          <label for="login-password">Password</label>
+          <input id="login-password" name="login-password" type="password" placeholder="Enter password" required>
+        </div>
+        <div>
+          <button type="submit">Log In</button>
+        </div>
+        <div id="login-message" class="message" role="status" aria-live="polite"></div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="container">
+    <small>&copy; <span id="year"></span> Lab 3</small>
+  </footer>
+
+  <script>
+    (function(){
+      var signupForm=document.getElementById('signup-form');
+      var signupMsg=document.getElementById('signup-message');
+      signupForm.addEventListener('submit',function(e){
+        e.preventDefault();
+        var email=document.getElementById('email').value.trim();
+        var password=document.getElementById('password').value;
+        if(!email||!password){ signupMsg.textContent='Please enter both email and password.'; signupMsg.className='message error'; return; }
+        localStorage.setItem('demoUser', JSON.stringify({email:email,password:password}));
+        signupMsg.textContent='Sign up successful. You can now log in.'; signupMsg.className='message success'; this.reset();
+      });
+
+      var loginForm=document.getElementById('login-form');
+      var loginMsg=document.getElementById('login-message');
+      loginForm.addEventListener('submit',function(e){
+        e.preventDefault();
+        var email=document.getElementById('username').value.trim();
+        var password=document.getElementById('login-password').value;
+        var stored=localStorage.getItem('demoUser');
+        if(!stored){ loginMsg.textContent='No account found. Please sign up first.'; loginMsg.className='message error'; return; }
+        try{
+          var user=JSON.parse(stored);
+          var ok=email===user.email && password===user.password;
+          loginMsg.textContent= ok?'Login successful!':'Invalid credentials.';
+          loginMsg.className = 'message ' + (ok?'success':'error');
+        }catch(err){ loginMsg.textContent='Stored credentials invalid. Please sign up again.'; loginMsg.className='message error'; }
+      });
+
+      document.getElementById('year').textContent=new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
+
+

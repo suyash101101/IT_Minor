@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 3 - Copilot Style Layout</title>
+  <style>
+    *{ box-sizing:border-box }
+    body{ margin:0; font-family: Arial, sans-serif; color:#222; background:#fafafa }
+    .container{ max-width:1000px; margin:0 auto; padding:12px }
+    header.site-header{ background:#fff; border-bottom:1px solid #ddd }
+    .nav{ display:grid; grid-template-columns:auto 1fr auto; align-items:center }
+    .brand{ display:inline-flex; align-items:center; gap:8px; color:#222; text-decoration:none }
+    .brand .logo{ width:24px; height:24px; border-radius:6px; background:#79a6ff }
+    .hero{ text-align:center; padding:20px 0 }
+    .big-logo{ width:64px; height:64px; border-radius:16px; margin:0 auto 8px; background:#cde }
+    .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px }
+    @media(max-width:700px){ .grid{ grid-template-columns:repeat(2,1fr) } }
+    @media(max-width:460px){ .grid{ grid-template-columns:1fr } }
+    .chip{ display:flex; align-items:center; gap:8px; padding:10px; border:1px solid #ddd; background:#fff; text-decoration:none; color:#222 }
+    .chip .icon{ width:22px; height:22px; border-radius:6px; background:#eee }
+    footer{ color:#555; padding:16px 0 }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#" aria-label="Microsoft Copilot in Edge home">
+        <span class="logo" aria-hidden="true">∞</span>
+        <span>Copilot in Edge</span>
+      </a>
+      <div></div>
+      <nav class="nav-right" aria-label="Top navigation">
+        <a href="#faqs">FAQs</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container hero">
+      <div class="big-logo" role="img" aria-label="Colorful logo"></div>
+      <h1>Hi, I’m Copilot in Edge!</h1>
+      <p>Your AI companion for staying organized</p>
+    </div>
+
+    <div class="container shortcuts">
+      <div class="grid" role="list">
+        <a class="chip" href="#" role="listitem"><span class="icon i1">A</span><span>Stretch or meme</span></a>
+        <a class="chip" href="#" role="listitem"><span class="icon i2">B</span><span>Reusable daily prompts</span></a>
+        <a class="chip" href="#" role="listitem"><span class="icon i3">C</span><span>Rel me a joke</span></a>
+        <a class="chip" href="#" role="listitem"><span class="icon i4">D</span><span>Cheeky invite</span></a>
+        <a class="chip" href="#" role="listitem"><span class="icon i5">E</span><span>Trip plan ideas</span></a>
+        <a class="chip" href="#" role="listitem"><span class="icon i6">F</span><span>Content ideas</span></a>
+        <a class="chip" href="#" role="listitem"><span class="icon i7">G</span><span>Design simplify</span></a>
+        <a class="chip" href="#" role="listitem"><span class="icon i8">H</span><span>Travel planning</span></a>
+      </div>
+      <div class="spaced"></div>
+      <div class="grid" role="list" aria-label="More shortcuts">
+        <a class="chip" href="#" role="listitem"><span class="icon i6">I</span><span>Public speaking tips</span></a>
+        <a class="chip" href="#" role="listitem"><span class="icon i3">J</span><span>Birthday gift ideas</span></a>
+        <a class="chip" href="#" role="listitem"><span class="icon i2">K</span><span>Make errands easy</span></a>
+        <a class="chip" href="#" role="listitem"><span class="icon i4">L</span><span>Gluten-free recipes</span></a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="container">
+    <small>&copy; <span id="year"></span> GG</small>
+  </footer>
+
+  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>
+
+

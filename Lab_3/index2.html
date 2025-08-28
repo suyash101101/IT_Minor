@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 3 - Layout Blueprint</title>
+  <style>
+    *{ box-sizing:border-box }
+    body{ margin:0; font-family: Arial, sans-serif; background:#fafafa; color:#222 }
+    header.site-header{ background:#0d6efd; color:#fff }
+    .header-inner{ max-width:1000px; margin:0 auto; padding:10px 12px; display:grid; grid-template-columns:40px 1fr 40px; align-items:center }
+    .site-title{ text-align:center; margin:0; font-size:18px }
+    .hamburger{ width:32px; height:32px; display:grid; place-items:center; border:1px solid rgba(255,255,255,.4); cursor:pointer }
+    .hamburger span,.hamburger span:before,.hamburger span:after{ content:""; display:block; width:18px; height:2px; background:#fff; position:relative }
+    .hamburger span:before{ position:absolute; top:-6px }
+    .hamburger span:after{ position:absolute; top:6px }
+    .shell{ max-width:1000px; margin:0 auto; padding:12px; display:grid; grid-template-columns:220px 1fr; gap:12px }
+    nav.site-menu{ background:#fff; border:1px solid #ddd; padding:10px }
+    .menu-title{ margin:0 0 8px 0 }
+    .menu-list{ list-style:none; padding:0; margin:0 }
+    .menu-list a{ display:block; padding:6px 8px; text-decoration:none; color:#222 }
+    main.content{ background:#fff; border:1px solid #ddd; padding:12px; min-height:300px }
+    footer.site-footer{ background:#eee; color:#333 }
+    .footer-inner{ max-width:1000px; margin:0 auto; padding:10px 12px }
+    @media(max-width:900px){ .shell{ grid-template-columns:1fr } nav.site-menu{ display:none } nav.site-menu.open{ display:block } }
+  </style>
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <button id="menuToggle" class="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="sideMenu">
+        <span></span>
+      </button>
+      <h1 class="site-title">My Sample Site</h1>
+      <span></span>
+    </div>
+  </header>
+
+  <div class="shell">
+    <nav id="sideMenu" class="site-menu" aria-label="Side menu">
+      <h2 class="menu-title">Menu</h2>
+      <ul class="menu-list">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+        <li><a href="#blog">Blog</a></li>
+      </ul>
+    </nav>
+
+    <main id="home" class="content" role="main">
+      <h2>Welcome to the Main Content Area</h2>
+      <p class="lead">This area contains the primary information of the page. It sits beside the side menu on wide screens and stacks below it on smaller screens.</p>
+      <p>Use this section to add articles, images, or any content relevant to the selected menu item. The layout is intentionally simple and uses clear spacing and typography to separate the header, menu, content, and footer.</p>
+      <section id="about">
+        <h3>About Us</h3>
+        <p>We build clean and accessible interfaces with a focus on usability and performance.</p>
+      </section>
+      <section id="services">
+        <h3>Services</h3>
+        <ul>
+          <li>Web Design</li>
+          <li>Frontend Development</li>
+          <li>Consulting</li>
+        </ul>
+      </section>
+      <section id="contact">
+        <h3>Contact Us</h3>
+        <p>Email: hello@example.com</p>
+      </section>
+    </main>
+  </div>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      Footer
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      var toggle=document.getElementById('menuToggle');
+      var menu=document.getElementById('sideMenu');
+      toggle.addEventListener('click',function(){
+        var open=menu.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', String(open));
+      });
+    })();
+  </script>
+</body>
+</html>
+
+
