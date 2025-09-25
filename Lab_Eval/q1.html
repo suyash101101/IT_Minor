@@ -1,0 +1,32 @@
+<html>
+ <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>q1 client validation</title>
+ </head>
+ <body>
+  <h1>q1</h1>
+   <form id="f">
+    <label>username <input id="us" required></label>
+    <label>email <input id="e" required></label>
+    <label>password <input id="pass" type="password" required></label>
+    <button type="submit">validate</button>
+    </form>
+    <div id="message"></div>
+    <script>
+     (function(){
+      var f=document.getElementById('f');
+     var m=document.getElementById('message');
+      f.addEventListener('submit',function(e){
+       e.preventDefault();
+       var u=document.getElementById('us').value;
+        var e=document.getElementById('e').value;
+        var p=document.getElementById('pass').value;var errs=[];
+        if(u.length<3) errs.push('username >=3');
+        if(e.indexOf('@')==-1) errs.push('email must contain @');
+        if(pass.length<6) errs.push('password >=6');
+          message.textContent = errs.length? errs.join(','): 'valid ready to send';
+        });
+      })();
+    </script>
+  </body>
+</html>

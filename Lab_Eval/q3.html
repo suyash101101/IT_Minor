@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q3 - Register POST</title>
+  </head>
+  <body>
+    <h1>Q3</h1>
+    <form id="f">
+      <input id="u" placeholder="username" required>
+      <input id="e" placeholder="email" required>
+      <input id="p" type="password" placeholder="password" required>
+      <button type="submit">Register</button>
+    </form>
+    <pre id="out"></pre>
+    <script>
+      (function(){
+        var f=document.getElementById('f');
+        var out=document.getElementById('out');
+        f.addEventListener('submit', async function(ev){
+          ev.preventDefault();
+          var payload={ username: u.value.trim(), email: e.value.trim(), password: p.value };
+          try{
+            var res=await fetch('/register', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+            var data=await res.json();
+            out.textContent=JSON.stringify(data, null, 2);
+          }catch(err){ out.textContent=String(err); }
+        });
+      })();
+    </script>
+  </body>
+</html>
